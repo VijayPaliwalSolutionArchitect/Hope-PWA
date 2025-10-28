@@ -1,0 +1,88 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}
+
+model Setting {
+  key   String @id
+  value String
+}
+
+model Blog {
+  id        String   @id @default(uuid())
+  title     String
+  slug      String   @unique
+  summary   String
+  content   String
+  author    String
+  tags      String   // Comma-separated
+  category  String
+  image     String?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(uuid())
+  name      String
+  message   String
+  rating    Int?
+  visible   Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Inquiry {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  replied   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Exception {
+  id         String    @id @default(uuid())
+  level      String    // info, warning, error, critical
+  source     String    // frontend, backend
+  message    String
+  stack      String?
+  metadata   String?   // JSON string
+  emailSent  Boolean   @default(false)
+  resolved   Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  resolvedAt DateTime?
+}
+
+model Log {
+  id        String   @id @default(uuid())
+  eventType String
+  message   String
+  meta      String?
+  createdAt DateTime @default(now())
+}
+
+model EmailTemplate {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  subject   String
+  htmlBody  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
