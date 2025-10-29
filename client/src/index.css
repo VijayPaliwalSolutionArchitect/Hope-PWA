@@ -2,7 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * 🎨 Hope Clinic - Global Styles
+ * Theme values are controlled by /app/theme.config.js
+ */
+
 @layer base {
+  :root {
+    /* CSS Variables from theme.config.js */
+    --color-primary: #0ea5e9;
+    --color-secondary: #a855f7;
+    --color-accent: #ef4444;
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
+  }
+  
   * {
     @apply border-border;
   }
@@ -15,29 +54,187 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
 }
 
 @layer components {
+  /* ============================================
+     🎨 GRADIENT TEXT
+     ============================================ */
   .gradient-text {
-    @apply bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent;
+  }
+  
+  .gradient-text-secondary {
+    @apply bg-gradient-to-r from-secondary-500 to-secondary-700 bg-clip-text text-transparent;
   }
 
+  /* ============================================
+     ✨ GLASS EFFECTS
+     ============================================ */
   .glass-effect {
     @apply bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/20;
   }
+  
+  .glass-card {
+    @apply glass-effect rounded-2xl p-6 shadow-xl;
+  }
 
+  /* ============================================
+     🔘 BUTTONS
+     ============================================ */
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+    @apply px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white rounded-lg font-semibold 
+           hover:from-primary-700 hover:to-secondary-700 
+           transition-all duration-300 transform hover:scale-105 hover:shadow-xl
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 border-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 dark:hover:bg-gray-700 transition-all duration-300;
+    @apply px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-white 
+           border-2 border-primary-600 rounded-lg font-semibold 
+           hover:bg-primary-50 dark:hover:bg-gray-700 
+           transition-all duration-300 active:scale-95;
+  }
+  
+  .btn-accent {
+    @apply px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-lg font-semibold 
+           hover:from-accent-600 hover:to-accent-700 
+           transition-all duration-300 transform hover:scale-105 hover:shadow-xl;
+  }
+  
+  .btn-success {
+    @apply px-6 py-3 bg-success-500 text-white rounded-lg font-semibold 
+           hover:bg-success-600 transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .btn-ghost {
+    @apply px-6 py-3 text-gray-700 dark:text-gray-300 rounded-lg font-semibold 
+           hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300;
   }
 
+  /* ============================================
+     📦 CARDS
+     ============================================ */
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300;
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 
+           hover:shadow-xl transition-shadow duration-300;
+  }
+  
+  .card-hover {
+    @apply card hover:transform hover:scale-105 transition-all duration-300 cursor-pointer;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-primary-500 to-secondary-600 
+           text-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300;
+  }
+
+  /* ============================================
+     📝 FORM ELEMENTS
+     ============================================ */
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+           dark:bg-gray-700 dark:text-white transition-all duration-300;
+  }
+  
+  .input-error {
+    @apply input border-error-500 focus:ring-error-500;
+  }
+  
+  .textarea {
+    @apply input resize-none;
+  }
+  
+  .select {
+    @apply input cursor-pointer;
+  }
+  
+  .checkbox {
+    @apply w-4 h-4 text-primary-600 border-gray-300 rounded 
+           focus:ring-primary-500 focus:ring-2 cursor-pointer;
+  }
+  
+  .radio {
+    @apply w-4 h-4 text-primary-600 border-gray-300 
+           focus:ring-primary-500 focus:ring-2 cursor-pointer;
+  }
+
+  /* ============================================
+     🏷️ BADGES & TAGS
+     ============================================ */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold;
+  }
+  
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300;
+  }
+  
+  .badge-secondary {
+    @apply badge bg-secondary-100 text-secondary-700 dark:bg-secondary-900 dark:text-secondary-300;
+  }
+  
+  .badge-success {
+    @apply badge bg-success-100 text-success-700 dark:bg-success-900 dark:text-success-300;
+  }
+  
+  .badge-warning {
+    @apply badge bg-warning-100 text-warning-700 dark:bg-warning-900 dark:text-warning-300;
+  }
+  
+  .badge-error {
+    @apply badge bg-error-100 text-error-700 dark:bg-error-900 dark:text-error-300;
+  }
+
+  /* ============================================
+     📊 ALERTS
+     ============================================ */
+  .alert {
+    @apply p-4 rounded-lg border-l-4 flex items-start space-x-3;
+  }
+  
+  .alert-success {
+    @apply alert bg-success-50 border-success-500 text-success-800 dark:bg-success-900/20 dark:text-success-200;
+  }
+  
+  .alert-warning {
+    @apply alert bg-warning-50 border-warning-500 text-warning-800 dark:bg-warning-900/20 dark:text-warning-200;
+  }
+  
+  .alert-error {
+    @apply alert bg-error-50 border-error-500 text-error-800 dark:bg-error-900/20 dark:text-error-200;
+  }
+  
+  .alert-info {
+    @apply alert bg-primary-50 border-primary-500 text-primary-800 dark:bg-primary-900/20 dark:text-primary-200;
+  }
+
+  /* ============================================
+     🔗 LINKS
+     ============================================ */
+  .link {
+    @apply text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 
+           transition-colors duration-300 underline-offset-4 hover:underline;
+  }
+  
+  .link-muted {
+    @apply text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 
+           transition-colors duration-300;
   }
 }
+
+/* ============================================
+   🎬 ANIMATIONS & EFFECTS
+   ============================================ */
 
 /* Smooth scrolling */
 html {
@@ -61,7 +258,7 @@ html {
 .spinner {
   border: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  border-top-color: #667eea;
+  border-top-color: var(--color-primary);
   width: 40px;
   height: 40px;
   animation: spin 1s ease-in-out infinite;
@@ -71,9 +268,46 @@ html {
   to { transform: rotate(360deg); }
 }
 
-/* Custom scrollbar */
+/* Pulse effect */
+.pulse-glow {
+  animation: pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 20px var(--color-primary);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 40px var(--color-primary);
+  }
+}
+
+/* Shimmer loading effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 2s infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ============================================
+   🖱️ CUSTOM SCROLLBAR
+   ============================================ */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -81,9 +315,94 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-indigo-600 rounded-full;
+  @apply bg-primary-600 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-indigo-700;
+  @apply bg-primary-700;
+}
+
+/* ============================================
+   📱 RESPONSIVE UTILITIES
+   ============================================ */
+@media (max-width: 640px) {
+  .mobile-padding {
+    @apply px-4;
+  }
+}
+
+/* ============================================
+   🎨 PROSE STYLING (for blog content)
+   ============================================ */
+.prose {
+  @apply max-w-none;
+}
+
+.prose h2 {
+  @apply text-2xl font-bold mb-4 mt-8;
+}
+
+.prose h3 {
+  @apply text-xl font-bold mb-3 mt-6;
+}
+
+.prose p {
+  @apply mb-4 leading-relaxed;
+}
+
+.prose ul {
+  @apply list-disc list-inside mb-4;
+}
+
+.prose ol {
+  @apply list-decimal list-inside mb-4;
+}
+
+.prose a {
+  @apply text-primary-600 hover:text-primary-700 underline;
+}
+
+.prose img {
+  @apply rounded-lg shadow-md my-6;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary-500 pl-4 italic my-4 text-gray-700 dark:text-gray-300;
+}
+
+.prose code {
+  @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm;
+}
+
+.prose pre {
+  @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4;
+}
+
+/* ============================================
+   🌈 UTILITY CLASSES
+   ============================================ */
+.text-balance {
+  text-wrap: balance;
+}
+
+.bg-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%);
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
 }
